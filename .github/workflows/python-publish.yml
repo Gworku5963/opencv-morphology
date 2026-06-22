@@ -29,10 +29,8 @@ jobs:
         python lightweight.py
 
     - name: Upload output artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: opencv-output
-        path: |
-          *.png
-          *.jpg
-          output/
+      uses: - name: Upload build artifacts
+  uses: actions/upload-artifact@v4
+  with:
+    name: python-build
+    path: dist/*

@@ -1,0 +1,33 @@
+name: OpenCV CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4.2.2
+
+    - name: Set up Python
+      uses: actions/setup-python@v5.3.0
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install opencv-python numpy matplotlib pytest
+
+    - name: Run OpenCV script
+      run: |
+        python lightweight.py
+
+    - name: Run tests with pytest
+      run: |
+        pytest --maxfail=1 --disable-warnings -q
